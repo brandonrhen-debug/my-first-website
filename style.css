@@ -5,10 +5,10 @@
   padding: 0;
 }
 
-body {
+ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #0f172a; /* dark blue */
-  color: #e5e7eb;      /* light gray */
+  background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+  color: #e5e7eb;
   display: flex;
   justify-content: center;
   padding: 30px 15px;
@@ -31,7 +31,7 @@ body {
   width: 96px;
   height: 96px;
   border-radius: 50%;
-  background: #1e293b;
+  background: #111827;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,6 +40,9 @@ body {
   font-size: 28px;
   letter-spacing: 1px;
   border: 2px solid red;
+  box-shadow:
+    0 0 0 2px rgba(248, 113, 113, 0.2),
+    0 18px 30px rgba(15, 23, 42, 0.9);
 }
 
 .header h1 {
@@ -60,7 +63,18 @@ body {
   margin-bottom: 14px;
   border: 1px solid #1e293b;
   box-shadow: 0 10px 25px rgba(15, 23, 42, 0.7);
+  transition:
+    transform 0.12s ease-out,
+    box-shadow 0.12s ease-out,
+    border-color 0.12s ease-out;
 }
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+  border-color: #38bdf8;
+}
+
 
 .card h2 {
   font-size: 1.3rem;
@@ -231,24 +245,40 @@ body {
 /* Confetti pieces */
 .confetti-piece {
   position: fixed;
-  width: 8px;
-  height: 14px;
+  border-radius: 2px;
   background: red; /* JS will overwrite with random colors */
-  top: -10px;
-  left: 50%;
-  opacity: 0.9;
+  transform: translate3d(0, 0, 0) rotateZ(0deg);
+  opacity: 1;
   z-index: 9999;
   pointer-events: none;
-  animation: confetti-fall 1.2s ease-out forwards;
+  animation: confetti-pop 700ms ease-out forwards;
 }
 
-@keyframes confetti-fall {
+@keyframes confetti-pop {
   0% {
     transform: translate3d(0, 0, 0) rotateZ(0deg);
     opacity: 1;
   }
   100% {
-    transform: translate3d(var(--x-move), 100vh, 0) rotateZ(360deg);
+    transform: translate3d(var(--dx), var(--dy), 0) rotateZ(720deg);
     opacity: 0;
   }
+}
+
+}
+.card h2 {
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.card h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 60px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #38bdf8, #22c55e);
+  opacity: 0.8;
 }
