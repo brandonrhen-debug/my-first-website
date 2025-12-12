@@ -126,3 +126,129 @@ body {
   font-size: 0.8rem;
   color: #6b7280;
 }
+/* Like button section */
+.like-section {
+  text-align: center;
+}
+
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  background: #22c55e;
+  color: #022c22;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.4);
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    background 0.1s ease,
+    opacity 0.1s ease;
+}
+
+.like-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(34, 197, 94, 0.45);
+}
+
+.like-button.liked {
+  background: #16a34a;
+  opacity: 0.9;
+}
+
+.like-button .heart {
+  font-size: 1.2rem;
+}
+
+/* Confetti pieces */
+.confetti-piece {
+  position: fixed;
+  width: 8px;
+  height: 14px;
+  background: red; /* JS will overwrite this with random colors */
+  top: -10px;
+  left: 50%;
+  opacity: 0.9;
+  z-index: 9999;
+  pointer-events: none;
+  animation: confetti-fall 1.2s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotateZ(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--x-move), 100vh, 0) rotateZ(360deg);
+    opacity: 0;
+  }
+}
+/* Like button section */
+.like-section {
+  text-align: center;
+}
+
+.like-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  background: #22c55e;
+  color: #022c22;
+  font-weight: 600;
+  box-shadow: 0 6px 14px rgba(34, 197, 94, 0.4);
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    background 0.1s ease,
+    opacity 0.1s ease;
+}
+
+.like-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(34, 197, 94, 0.45);
+}
+
+.like-button.liked {
+  background: #16a34a;
+  opacity: 0.9;
+}
+
+.like-button .heart {
+  font-size: 1.2rem;
+}
+
+/* Confetti pieces */
+.confetti-piece {
+  position: fixed;
+  width: 8px;
+  height: 14px;
+  background: red; /* JS will overwrite with random colors */
+  top: -10px;
+  left: 50%;
+  opacity: 0.9;
+  z-index: 9999;
+  pointer-events: none;
+  animation: confetti-fall 1.2s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotateZ(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--x-move), 100vh, 0) rotateZ(360deg);
+    opacity: 0;
+  }
+}
