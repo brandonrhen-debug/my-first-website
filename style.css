@@ -265,18 +265,20 @@
   }
 }
 
-}
 .card h2 {
   position: relative;
+  display: inline-block;
+  margin-bottom: 12px;
   padding-bottom: 4px;
 }
 
 .card h2::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 0;
-  width: 60px;
+  width: 64px;
   height: 2px;
   border-radius: 999px;
   background: linear-gradient(90deg, #38bdf8, #22c55e);
