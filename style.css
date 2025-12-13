@@ -12,6 +12,17 @@
   display: flex;
   justify-content: center;
   padding: 30px 15px;
+   /* added for the background canvas */
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+/* Full-screen background canvas */
+#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;      /* sit behind your cards/content */
+  pointer-events: none;
 }
 
 /* Page container */
@@ -19,6 +30,8 @@
   width: 100%;
   max-width: 760px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* Header */
