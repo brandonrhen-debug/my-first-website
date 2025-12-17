@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Brandon Rhen – Digital Journal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Canvas used by script.js for the geometric background -->
+  <canvas id="bgCanvas"></canvas>
+
+  <div class="page">
+    <header class="header">
+      <div class="avatar-circle">
+        <span>BR</span>
+      </div>
+      <h1>Documents / Journal</h1>
+
+      <nav class="nav">
+        <ul class="links">
+          <li><a href="index.html">About</a></li>
+          <li><a href="documents.html">Documents</a></li>
+        </ul>
+      </nav>
+
+      <p class="tagline">
+        Digital lab journal<br>
+        OS installs, tips, &amp; shortcuts
+      </p>
+    </header>
+
+    <main>
+      <!-- Intro -->
+      <section class="card journal-intro">
+        <section>
+          <h2>Purpose of This Page</h2>
+          <p>
+            The purpose of this page is to serve as my digital journal.
+            I want a place to document what I’m building so I can recreate anything I’ve done before
+            and share what I learn with others.
+          </p>
+          <p>
+            Before I got into homelabbing, the main problem I wanted to solve was building my own “cloud.”
+            That idea, plus a few conversations with coworkers, lots of YouTube videos, and many weekends
+            spent rebuilding my homelab after I bricked something, led me here.
+          </p>
+        </section>
+      </section>
+
+      <!-- Homelab Hardware -->
+      <section class="card homelab-hardware" id="homelab-hardware">
+        <h2>Homelab Hardware</h2>
+        <p>
+          Quick list of the main hardware in my homelab. I can update these as I upgrade or swap gear.
+        </p>
+        <ul>
+          <li>Dell Optiplex 7010 old office model</li>
+          <li>24 GB of DDR3 RAM</li>
+          <li>Intel I5-3570 4 cores</li>
+          <li>2x 1tb 3.5in hard drives (used in raid0=mirror)</li>
+          <li>2tb 3.5in hard drive</li>
+        </ul>
+      </section>
+
+      <div class="journal-layout">
+        <!-- Sidebar / Table of contents -->
+        <aside class="card journal-sidebar">
+        <img src="truenaslogo.webp" alt="truenaslogo" class="card-logo">
+
+          <h2>Sections</h2>
+          <ul class="journal-toc">
+  <li><a href="#tailscale">Tailscale</a></li>
+  <li><a href="#cloudflare-setup">Cloudflare-setup</a></li>
+  <li><a href="#jellyfin-setup">Jellyfin-setup</a></li>
+  <li><a href="#nextcloud-setup">nextcloud-setup</a></li>
+</ul>
+
+          <h3>OS running Homelab</h3>
+          <ul class="tag-list">
+            <li class="tag">TrueNAS</li>
+            <li><strong>Reason</strong>I tried out Proxmox first, but that did 
+            not suit what I needed and was not as user friendly/beginner friendly.
+            I switched to Truenas and has been smooth sailing.</li>
+          </ul>
+        </aside>
+<!-- ENTRY 1 (Tailscale) -->
+<article class="card journal-entry tailscale-card" id="tailscale">
+  <!-- Logo in top-right -->
+  <img src="tailscalelogo.webp" alt="Tailscale logo" class="card-logo">
+
+  <h2>Deploy Tailscale</h2>
+
+  <p>
+    2025-12-17 last updated
+  </p>
+  <ol>
+    <li><strong>Context</strong> – I chose to install tailscale because I got introduced to 
+      the software from a cowrker when I asked how does he connect to his smb when he is 
+      not home. Also, I seen some videos while I have been researching homelab applications,
+      but seeing the application being using by cowrker in real-time is what made be bite the bullet.
+    </li>
+    <li><strong>Steps I Took</strong> –
+      <ul>
+        <li>Starting from the web UI dashboard, select the three lines in the top left corner and choose Apps.</li>
+        <li>Go to Discover Apps, select Show All (blue letters below the search), and scroll to Tailscale.</li>
+        <li>Select Install.</li>
+        <li>In the configure settings you will see “Auth Key*”; generate this from your Tailscale dashboard at
+          <a href="https://login.tailscale.com/admin/settings/keys" target="_blank">https://login.tailscale.com/admin/settings/keys</a>.
+        </li>
+        <li>Create the auth key (title it, set your toggles, generate, then copy) and return to TrueNAS.</li>
+        <li>Paste the auth key into the TrueNAS installer, leave the check boxes as-is, and keep the rest of the defaults.</li>
+        <li>Scroll to the bottom, install, and confirm the device appears in your Tailscale dashboard.</li>
+      </ul>
+    </li>
+    <li><strong>Issues &amp; Gotchas</strong> – If a subnet shows a timer, double-click the device in the dashboard,
+      open Subnet → Awaiting approval, click Edit, check the box next to the needed IP address (e.g., 192.xxx.x), and save.
+    </li>
+    <li><strong>Notes for Next Time</strong> – not really much to correct, pretty straight forward install!</li>
+  </ol>
+</article>
+          <!-- ENTRY 2 (Cloudflare) -->
+<article class="card journal-entry" id="cloudflare-setup">
+    <img src="cloudflarelogo.webp" alt="Cloudflare logo" class="card-logo" />
+
+  <h2>Cloudflare-setup</h2>
+            <p class="entry-meta">
+              2025-12-17 last updated
+            </p>
+            <h3>Context</h3>
+            <p>I was in the search of a way on how to access my home lab remotely. Also,
+            this was before I learned about Tailscale, how to port forward(definitely will note how to port forward)
+            and this suited the job. Along with having a cool domain name to access my home labs</p>
+            <h3>Goal</h3>
+            <ul>
+              <li>insert-here</li>
+              <li>insert-here.</li>
+              <li>insert-here.</li>
+              <li>insert-here</li>
+            </ul>
+
+            <h3>Steps I Took</h3>
+            <ol>
+              <li>Backed up important Windows data and created a restore point.</li>
+              <li>From Windows, shrank the existing partition to free space for Ubuntu.</li>
+              <li>Booted from the Ubuntu 24.04 USB installer.</li>
+              <li>Chose <em>"Something else"</em> in the installer and manually created Linux partitions.</li>
+              <li>Installed Ubuntu to the new partitions and confirmed GRUB was on the main drive.</li>
+              <li>After first boot, ran system updates and installed proprietary drivers where needed.</li>
+            </ol>
+
+            <h3>Commands / Shortcuts to Remember</h3>
+            <pre><code># Update &amp; upgrade
+sudo apt update && sudo apt upgrade
+
+# Enable additional drivers GUI
+software-properties-gtk
+            </code></pre>
+
+            <h3>Issues &amp; Gotchas</h3>
+            <ul>
+              <li>Make sure BIOS/UEFI boot mode is consistent (UEFI for both Windows and Ubuntu).</li>
+              <li>
+                If the bootloader breaks, boot from a live USB and repair GRUB (for example
+                with <code>boot-repair</code> or chroot + reinstalling GRUB).
+              </li>
+            </ul>
+
+            <h3>Notes for Next Time</h3>
+            <p>
+              Export a list of critical Windows apps before starting. Keep a small
+              USB handy with drivers and tools in case networking doesn’t work right
+              away on Ubuntu or Windows after changes.
+            </p>
+          </article>
+
+          <!-- ENTRY 2 (using template structure) -->
+          <article class="card journal-entry" id="jellyfin-setup">
+              <img src="jellyfinlogo.png" alt="Jellyfin logo" class="card-logo" />
+
+            <h2>Jellyfin-setup</h2>
+            <p class="entry-meta">
+              <span class="entry-date">2025-12-17 last updated</span>
+        
+              </span>
+            </p>
+
+            <h3>Context</h3>
+            <p>
+              During my homelab research, I seen lots of people installing Jellyfin as their media server.
+              Also, a coworker of mine heard me mention Jellyfin and got his setup before me which was my
+              my breaking point to install it. I wanted a way to stream my own media.
+            </p>
+
+            <h3>Goal</h3>
+            <ul>
+              <li>Would like old and new movies.</li>
+              <li>Childhood shows(mandadtory).</li>
+              <li>Would like to listen to music as well.</li>
+            </ul>
+
+            <h3>Steps I Took</h3>
+        <ul>
+              <li><strong>Starting from the web ui dashboard, select the three lines in 
+                the top left corner then select dataset</li>
+              <li><strong>Cmd + Tab</strong> – Switch apps.</li>
+              <li><strong>Cmd + Shift + 4</strong> – Screenshot selection.</li>
+              <li><strong>Cmd + Option + Esc</strong> – Force Quit dialog.</li>
+            </ul>
+
+            <h3>Commands / Run Box Shortcuts</h3>
+            <pre><code># Open Device Manager
+devmgmt.msc
+
+# System properties
+sysdm.cpl
+
+# Power options
+powercfg.cpl
+            </code></pre>
+
+            <h3>Issues &amp; Gotchas</h3>
+            <ul>
+              <li>Windows Update doesn’t always pull the best GPU drivers—vendor site is safer.</li>
+              <li>Watch out for bundled apps or OEM bloat to uninstall early.</li>
+              <li>Verify activation status after the install, especially on hardware changes.</li>
+            </ul>
+
+            <h3>Notes for Next Time</h3>
+            <p>
+              Consider exporting a list of installed programs (or using a package manager
+              like Winget) so I can rebuild the same setup faster. Also keep a checklist
+              of apps to install in a text file inside this journal.
+            </p>
+          </article>
+
+          <!-- ENTRY 3 (using template structure) -->
+          <article class="card journal-entry" id="nextcloud-setup">
+            <img src="Nextcloud-Logo.webp" class="card-logo">
+
+            <h2>nextcloud-setup</h2>
+            <p class="entry-meta">
+              <span class="entry-date">2025-12-17 last updated</span>
+              <span class="entry-tags">
+              </span>
+            </p>
+
+            <h3>Context</h3>
+            <p>
+              Ongoing notes for macOS shortcuts and commands that are actually useful
+              in daily use and helpdesk work. This is meant to be a quick reference
+              when I’m supporting users on Macs.
+            </p>
+
+            <h3>Goal</h3>
+            <ul>
+              <li>edit text.</li>
+              <li>edit text.</li>
+              <li>edit text.</li>
+            </ul>
+
+            <h3>Steps / Shortcuts I Use Often</h3>
+            <ul>
+              <li><strong>Cmd + Space</strong> – Spotlight search.</li>
+              <li><strong>Cmd + Tab</strong> – Switch apps.</li>
+              <li><strong>Cmd + Shift + 4</strong> – Screenshot selection.</li>
+              <li><strong>Cmd + Option + Esc</strong> – Force Quit dialog.</li>
+            </ul>
+
+            <h3>Terminal Commands</h3>
+            <pre><code># Show hidden files in Finder
+defaults write com.apple.finder AppleShowAllFiles YES
+killall Finder
+
+# List disks
+diskutil list
+            </code></pre>
+
+            <h3>Issues &amp; Gotchas</h3>
+            <ul>
+              <li>Remember to undo hidden files if needed (set back to NO and restart Finder).</li>
+              <li>Be careful with <code>diskutil</code> commands—double-check disk identifiers before erasing.</li>
+            </ul>
+
+            <h3>Notes for Next Time</h3>
+            <p>
+              Add more support scenarios here: common Wi-Fi issues, login keychain problems,
+              and printer setup steps. This can become a quick reference during helpdesk calls.
+            </p>
+          </article>
+        </section>
+      </div>
+    </main>
+    <footer class="footer">
+      <p>© <span id="year"></span> Brandon Rhen. Built with HTML, CSS &amp; curiosity.</p>
+    </footer>
+  </div>
+  <!-- Load the same JS that powers the geometric background + like button -->
+  <script src="script.js"></script>
+</body>
+</html>

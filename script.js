@@ -78,80 +78,149 @@ function initBackgroundShapes() {
 
   const ctx = canvas.getContext("2d");
 
+  // base colors derived from body background
+  const bodyBg = getBodyBackgroundBaseColor();
+  const baseRGB = parseRGB(bodyBg);
+  const contrastHSL = getContrastingColor(bodyBg);
+
+  let width = window.innerWidth;
+  let height = window.innerHeight;
+  let shapes = [];
+
+  function createShapes() {
+    shapes = [];
+
+    const area = width * height;
+    // Controls density of shapes
+    const numShapes = Math.round(area / 9999); // more area => more shapes
+
+    for (let i = 0; i < numShapes; i++) {
+      const size = 20 + Math.random() * 80;
+      const rotation = Math.random() * Math.PI * 2;
+      const rotationSpeed = (Math.random() - 0.5) * 0.02;
+      const lOffset = (Math.random() - 0.5) * 0.2;
+      const alpha = 0.06 + Math.random() * 0.18;
+
+      const fillLightness = Math.min(
+        0.95,
+        Math.max(0.05, contrastHSL.l + lOffset)
+      );
+      const strokeLightness = Math.min(
+        0.98,
+        Math.max(0.1, contrastHSL.l + lOffset + 0.1)
+      );
+
+      const fillColor = hslToCss(
+        contrastHSL.h,
+        contrastHSL.s,
+        fillLightness,
+        alpha
+      );
+      const strokeColor = hslToCss(
+        contrastHSL.h,
+        contrastHSL.s,
+        strokeLightness,
+        alpha * 1.6
+      );
+
+      shapes.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.4, // slow drift
+        vy: (Math.random() - 0.5) * 0.4,
+        size,
+        rotation,
+        rotationSpeed,
+        type: Math.floor(Math.random() * 3), // 0 = circle, 1 = rect, 2 = triangle
+        fillColor,
+        strokeColor
+      });
+    }
+  }
+
   function resizeCanvas() {
     const dpr = window.devicePixelRatio || 1;
     canvas.width = window.innerWidth * dpr;
     canvas.height = window.innerHeight * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    renderShapes();
+
+    width = window.innerWidth;
+    height = window.innerHeight;
+
+    createShapes();
   }
 
-  function renderShapes() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+  function updateShape(s) {
+    s.x += s.vx;
+    s.y += s.vy;
+    s.rotation += s.rotationSpeed;
 
-    ctx.clearRect(0, 0, width, height);
+    const margin = s.size;
 
-    const bodyBg = getBodyBackgroundBaseColor();
-    const contrastHSL = getContrastingColor(bodyBg);
+    // wrap around edges for endless drift
+    if (s.x < -margin) s.x = width + margin;
+    if (s.x > width + margin) s.x = -margin;
+    if (s.y < -margin) s.y = height + margin;
+    if (s.y > height + margin) s.y = -margin;
+  }
 
-    // Controls density of shapes
-    const numShapes = Math.round((width * height) / 30000);
+  function drawShape(s) {
+    ctx.save();
+    ctx.translate(s.x, s.y);
+    ctx.rotate(s.rotation);
 
-    for (let i = 0; i < numShapes; i++) {
-      const x = Math.random() * width;
-      const y = Math.random() * height;
-      const size = 40 + Math.random() * 120;
-      const rotation = Math.random() * Math.PI * 2;
+    ctx.fillStyle = s.fillColor;
+    ctx.strokeStyle = s.strokeColor;
+    ctx.lineWidth = 1;
 
-      const lOffset = (Math.random() - 0.5) * 0.15;
-      const alpha = 0.06 + Math.random() * 0.14;
+    const size = s.size;
 
-      const color = hslToCss(
-        contrastHSL.h,
-        contrastHSL.s,
-        Math.min(0.95, Math.max(0.05, contrastHSL.l + lOffset)),
-        alpha
-      );
+    switch (s.type) {
+      case 0: // Circle (filled)
+        ctx.beginPath();
+        ctx.arc(0, 0, size / 2, 0, Math.PI * 2);
+        ctx.fill();
+        break;
 
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(rotation);
-      ctx.fillStyle = color;
+      case 1: // Rounded rect (outline)
+        ctx.beginPath();
+        if (ctx.roundRect) {
+          ctx.roundRect(-size / 2, -size / 2, size, size, size / 6);
+        } else {
+          ctx.rect(-size / 2, -size / 2, size, size);
+        }
+        ctx.stroke();
+        break;
 
-      const shapeType = Math.floor(Math.random() * 3); // 0 = circle, 1 = rect, 2 = triangle
-
-      switch (shapeType) {
-        case 0: // Circle
-          ctx.beginPath();
-          ctx.arc(0, 0, size / 2, 0, Math.PI * 2);
-          ctx.fill();
-          break;
-        case 1: // Rounded rect
-          ctx.beginPath();
-          if (ctx.roundRect) {
-            ctx.roundRect(-size / 2, -size / 2, size, size, size / 6);
-          } else {
-            ctx.rect(-size / 2, -size / 2, size, size);
-          }
-          ctx.fill();
-          break;
-        case 2: // Triangle
-          ctx.beginPath();
-          ctx.moveTo(-size / 2, size / 2);
-          ctx.lineTo(0, -size / 2);
-          ctx.lineTo(size / 2, size / 2);
-          ctx.closePath();
-          ctx.fill();
-          break;
-      }
-
-      ctx.restore();
+      case 2: // Triangle (outline)
+        ctx.beginPath();
+        ctx.moveTo(-size / 2, size / 2);
+        ctx.lineTo(0, -size / 2);
+        ctx.lineTo(size / 2, size / 2);
+        ctx.closePath();
+        ctx.stroke();
+        break;
     }
+
+    ctx.restore();
+  }
+
+  function animate() {
+    // Slightly opaque fill for a smooth, dark base with soft trails
+    ctx.fillStyle = `rgba(${baseRGB.r}, ${baseRGB.g}, ${baseRGB.b}, 0.92)`;
+    ctx.fillRect(0, 0, width, height);
+
+    shapes.forEach((s) => {
+      updateShape(s);
+      drawShape(s);
+    });
+
+    requestAnimationFrame(animate);
   }
 
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
+  requestAnimationFrame(animate);
 }
 
 // === Your existing code ===
