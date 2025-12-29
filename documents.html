@@ -41,8 +41,8 @@
           </p>
           <p>
             Before I got into homelabbing, the main problem I wanted to solve was building my own “cloud.”
-            That idea, plus a few conversations with coworkers, lots of YouTube videos, and many weekends
-            spent rebuilding my homelab after I bricked something, led me here.
+            That idea, plus a few conversations with coworkers, lots of YouTube videos, and too many instances
+            were I would have to start completely over from a fresh install of my hypervisor or OS.
           </p>
         </section>
       </section>
@@ -78,9 +78,8 @@
           <h3>OS running Homelab</h3>
           <ul class="tag-list">
             <li class="tag">TrueNAS</li>
-            <li><strong>Reason</strong>I tried out Proxmox first, but that did 
-            not suit what I needed and was not as user friendly/beginner friendly.
-            I switched to Truenas and has been smooth sailing.</li>
+            <li>The reason I chose Truenas is because when I was researching(watching youtube videos)
+              that seemed to be popular.</li>
           </ul>
         </aside>
 <!-- ENTRY 1 (Tailscale) -->
@@ -95,9 +94,9 @@
   </p>
   <ol>
     <li><strong>Context</strong> – I chose to install tailscale because I got introduced to 
-      the software from a cowrker when I asked how does he connect to his smb when he is 
+      the software from a coworker when I asked how does he connect to his smb when he is 
       not home. Also, I seen some videos while I have been researching homelab applications,
-      but seeing the application being using by cowrker in real-time is what made be bite the bullet.
+      but seeing the application being using by coworker in real-time is what made be bite the bullet.
     </li>
     <li><strong>Steps I Took</strong> –
       <ul>
@@ -132,30 +131,22 @@
             and this suited the job. Along with having a cool domain name to access my home labs</p>
             <h3>Goal</h3>
             <ul>
-              <li>insert-here</li>
-              <li>insert-here.</li>
-              <li>insert-here.</li>
-              <li>insert-here</li>
+              <li>remote access to home server, without having to port forward.</li>
+              <li>Wanted cool name for when I tell people about a homelab projects.</li>
+              <li>cool name for ease of search.</li>
             </ul>
+            <h3>Disclaimer</h3>
+            <p>domain name required</p>
 
             <h3>Steps I Took</h3>
             <ol>
-              <li>Backed up important Windows data and created a restore point.</li>
-              <li>From Windows, shrank the existing partition to free space for Ubuntu.</li>
-              <li>Booted from the Ubuntu 24.04 USB installer.</li>
-              <li>Chose <em>"Something else"</em> in the installer and manually created Linux partitions.</li>
-              <li>Installed Ubuntu to the new partitions and confirmed GRUB was on the main drive.</li>
-              <li>After first boot, ran system updates and installed proprietary drivers where needed.</li>
+              <li>Starting from the web ui dashboard, select the three lines in the top left corner then select apps.</li>
+              <li> Go to discover apps->search ‘Cloudflare’ at the top->install.</li>
+              <li>Before we can install we need the token key from cloudflare.</li>
+              <li>sign in or create an account.</li>
+              <li>You'll need to onboard a domain name, the "+ add domain" button from the account home page.</li>
+              <li>.</li>
             </ol>
-
-            <h3>Commands / Shortcuts to Remember</h3>
-            <pre><code># Update &amp; upgrade
-sudo apt update && sudo apt upgrade
-
-# Enable additional drivers GUI
-software-properties-gtk
-            </code></pre>
-
             <h3>Issues &amp; Gotchas</h3>
             <ul>
               <li>Make sure BIOS/UEFI boot mode is consistent (UEFI for both Windows and Ubuntu).</li>
@@ -196,41 +187,51 @@ software-properties-gtk
               <li>Would like old and new movies.</li>
               <li>Childhood shows(mandadtory).</li>
               <li>Would like to listen to music as well.</li>
+              <li>Remote access to the server.</li>
             </ul>
 
             <h3>Steps I Took</h3>
         <ul>
-              <li><strong>Starting from the web ui dashboard, select the three lines in 
-                the top left corner then select dataset</li>
-              <li><strong>Cmd + Tab</strong> – Switch apps.</li>
-              <li><strong>Cmd + Shift + 4</strong> – Screenshot selection.</li>
-              <li><strong>Cmd + Option + Esc</strong> – Force Quit dialog.</li>
+                      <h3>Creating SMB(Server Message Block/Network drive)</h3>
+              <li>Starting from the web ui dashboard, select the three lines in 
+                the top left corner, then select datasets.</li>
+              <li>Double-click the dataset/pool you would like to add to and select add dataset.</li>
+              <li>name the dataset(i.e. jellypool), change the Dataset Preset to Apps, change the name
+                of the smb(i.e.jellypoolsmb) and save. Also, save the name of the smb somewhere or write it down.</li>
+                      <h3>Creating a User for the App to access the SMB</h3>
+              <li>Select the three lines in the top left corner then select creditials, then groups.</li>
+              <li>select add in the top right, name the group(i.e.jelyfingroup) and save.</li>
+              <li>select the three lines in the top left corner, creditials and select users.</li>
+              <li>select Add in the top right corner, name the user(i.e. jellyuser), 
+                SMB access should already be selected, but if not check that box.</li>
+              <li>Create a password. Save the name and password, this will be how jellyfin accesses the SMB.</li>
+              <li>change Groups, scroll to the jellyfingroup and select.</li>
+              <li>Change Home Directory to the jellysmb and save.</li>
+                      <h3>Installing Jellyfin</h3>
+              <li>Select the three lines in the top left corner, Apps, 
+                Discover Apps, search Jellyfin, select and install.</li>
+              <li>I left most of the settings alone uptil Aditional Storage. Select Add.</li>
+              <li>This next part I messed up on so many times so please just stick to the script. 
+                Change Type to SMB/CIFS Share, Mount Path is /mnt/nameofdataset/nameofsmb. example: /mnt/jellypool/jellypoolsmb</li>
+              <li>step</li>
+              <li>step</li>
+              <li>step</li>
+              <li>step</li>
+              <li>step</li>
+              <li>step</li>
+              <li>step</li>
+              <li>step</li>
+              <li>step</li>
+              <li>step</li>
             </ul>
-
-            <h3>Commands / Run Box Shortcuts</h3>
-            <pre><code># Open Device Manager
-devmgmt.msc
-
-# System properties
-sysdm.cpl
-
-# Power options
-powercfg.cpl
-            </code></pre>
-
             <h3>Issues &amp; Gotchas</h3>
             <ul>
-              <li>Windows Update doesn’t always pull the best GPU drivers—vendor site is safer.</li>
-              <li>Watch out for bundled apps or OEM bloat to uninstall early.</li>
-              <li>Verify activation status after the install, especially on hardware changes.</li>
+              <li>insert</li>
+              <li>insert</li>
+              <li>insert</li>
             </ul>
-
             <h3>Notes for Next Time</h3>
-            <p>
-              Consider exporting a list of installed programs (or using a package manager
-              like Winget) so I can rebuild the same setup faster. Also keep a checklist
-              of apps to install in a text file inside this journal.
-            </p>
+            <p>insert</p>
           </article>
 
           <!-- ENTRY 3 (using template structure) -->
@@ -239,16 +240,16 @@ powercfg.cpl
 
             <h2>nextcloud-setup</h2>
             <p class="entry-meta">
-              <span class="entry-date">2025-12-17 last updated</span>
+              <span class="entry-date">2025-12-28 last updated</span>
               <span class="entry-tags">
               </span>
             </p>
 
             <h3>Context</h3>
             <p>
-              Ongoing notes for macOS shortcuts and commands that are actually useful
-              in daily use and helpdesk work. This is meant to be a quick reference
-              when I’m supporting users on Macs.
+              I was searching for a self-hosted app similar to the way Onedrive function
+            because I admir the application's functionality.
+            
             </p>
 
             <h3>Goal</h3>
@@ -258,34 +259,27 @@ powercfg.cpl
               <li>edit text.</li>
             </ul>
 
-            <h3>Steps / Shortcuts I Use Often</h3>
+            <h3>Steps</h3>
+            <ol>
+              <li>insert</li>
+              <li>insert</li>
+              <li>insert</li>
+              <li>insert</li>
+            </ol>
+
+            <h2>Things I like and dislike</h2>
+            <h3>Things I like </h3>
             <ul>
-              <li><strong>Cmd + Space</strong> – Spotlight search.</li>
-              <li><strong>Cmd + Tab</strong> – Switch apps.</li>
-              <li><strong>Cmd + Shift + 4</strong> – Screenshot selection.</li>
-              <li><strong>Cmd + Option + Esc</strong> – Force Quit dialog.</li>
+              <li>I enjoy the web ui of the app</li>
+              <li>The ease of installment</li>
             </ul>
-
-            <h3>Terminal Commands</h3>
-            <pre><code># Show hidden files in Finder
-defaults write com.apple.finder AppleShowAllFiles YES
-killall Finder
-
-# List disks
-diskutil list
-            </code></pre>
-
-            <h3>Issues &amp; Gotchas</h3>
+            </ol>
+            <h3> Things I dislike </h3>
             <ul>
-              <li>Remember to undo hidden files if needed (set back to NO and restart Finder).</li>
-              <li>Be careful with <code>diskutil</code> commands—double-check disk identifiers before erasing.</li>
-            </ul>
+              <li>
 
-            <h3>Notes for Next Time</h3>
-            <p>
-              Add more support scenarios here: common Wi-Fi issues, login keychain problems,
-              and printer setup steps. This can become a quick reference during helpdesk calls.
-            </p>
+              </li>
+            </ul>
           </article>
         </section>
       </div>
