@@ -1,36 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Brandon Rhen – Digital Journal</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <!-- Canvas used by script.js for the geometric background -->
-  <canvas id="bgCanvas"></canvas>
-
-  <div class="page">
-    <header class="header">
-      <div class="avatar-circle">
-        <span>BR</span>
-      </div>
-      <h1>Documents / Journal</h1>
-
-      <nav class="nav">
-        <ul class="links">
-          <li><a href="index.html">About</a></li>
-          <li><a href="documents.html">Documents</a></li>
-        </ul>
-      </nav>
-
-      <p class="tagline">
-        Digital lab journal<br>
-        OS installs, tips, &amp; shortcuts
-      </p>
-    </header>
-
-    <main>
-      <!-- Intro -->
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="A historical record of learning and experimentation. These instructions are incomplete and may be outdated."><title>December 2025 Journal · Brandon Rhen</title><link rel="stylesheet" href="style.css"><script src="script.js" defer></script></head>
+<body><a class="skip" href="#main">Skip to content</a><header class="site-header"><a class="brand" href="index.html"><span class="monogram">BR<span>.</span></span><span>BRANDON RHEN<small>PERSONAL LAB / FIELD NOTES</small></span></a><nav aria-label="Primary"><a href="index.html">Home</a><a href="homelab.html">My Homelab</a><a href="projects.html">Projects</a><a href="software.html">Software Shelf</a><a href="archives.html">The Archives</a></nav></header>
+<main id="main"><div class="page-heading"><p class="eyebrow">HISTORICAL JOURNAL / DECEMBER 2025</p><h1>The original field notes.</h1><p class="intro">A historical record of learning and experimentation. These instructions are incomplete and may be outdated.</p></div><p class="notice">Historical edition · Original journal wording retained; markup repaired for reading. <a href="archive/december-2025/documents.html">Open the verbatim original ↗</a> · <a href="archives.html">Back to The Archives</a></p><div class="legacy-journal">      <!-- Intro -->
       <section class="card journal-intro">
         <section>
           <h2>Purpose of This Page</h2>
@@ -172,7 +143,6 @@
             <p class="entry-meta">
               <span class="entry-date">2025-12-17 last updated</span>
         
-              </span>
             </p>
 
             <h3>Context</h3>
@@ -192,13 +162,13 @@
 
             <h3>Steps I Took</h3>
         <ul>
-                      <h3>Creating SMB(Server Message Block/Network drive)</h3>
+                      <li class="list-heading"><h3>Creating SMB(Server Message Block/Network drive)</h3></li>
               <li>Starting from the web ui dashboard, select the three lines in 
                 the top left corner, then select datasets.</li>
               <li>Double-click the dataset/pool you would like to add to and select add dataset.</li>
               <li>name the dataset(i.e. jellypool), change the Dataset Preset to Apps, change the name
                 of the smb(i.e.jellypoolsmb) and save. Also, save the name of the smb somewhere or write it down.</li>
-                      <h3>Creating a User for the App to access the SMB</h3>
+                      <li class="list-heading"><h3>Creating a User for the App to access the SMB</h3></li>
               <li>Select the three lines in the top left corner then select creditials, then groups.</li>
               <li>select add in the top right, name the group(i.e.jelyfingroup) and save.</li>
               <li>select the three lines in the top left corner, creditials and select users.</li>
@@ -207,7 +177,7 @@
               <li>Create a password. Save the name and password, this will be how jellyfin accesses the SMB.</li>
               <li>change Groups, scroll to the jellyfingroup and select.</li>
               <li>Change Home Directory to the jellysmb and save.</li>
-                      <h3>Installing Jellyfin</h3>
+                      <li class="list-heading"><h3>Installing Jellyfin</h3></li>
               <li>Select the three lines in the top left corner, Apps, 
                 Discover Apps, search Jellyfin, select and install.</li>
               <li>I left most of the settings alone uptil Aditional Storage. Select Add.</li>
@@ -236,7 +206,7 @@
 
           <!-- ENTRY 3 (using template structure) -->
           <article class="card journal-entry" id="nextcloud-setup">
-            <img src="Nextcloud-Logo.webp" class="card-logo">
+            <img src="Nextcloud-Logo.webp" alt="Nextcloud logo" class="card-logo">
 
             <h2>nextcloud-setup</h2>
             <p class="entry-meta">
@@ -273,7 +243,6 @@
               <li>I enjoy the web ui of the app</li>
               <li>The ease of installment</li>
             </ul>
-            </ol>
             <h3> Things I dislike </h3>
             <ul>
               <li>
@@ -281,14 +250,5 @@
               </li>
             </ul>
           </article>
-        </section>
       </div>
-    </main>
-    <footer class="footer">
-      <p>© <span id="year"></span> Brandon Rhen. Built with HTML, CSS &amp; curiosity.</p>
-    </footer>
-  </div>
-  <!-- Load the same JS that powers the geometric background + like button -->
-  <script src="script.js"></script>
-</body>
-</html>
+</div></main><footer><a class="brand-name" href="index.html">BrandonRhen<span>.com</span></a><p>A personal corner of the internet. Built with curiosity.</p><a href="archives.html">Keep the old notes →</a></footer></body></html>
